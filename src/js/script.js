@@ -30,20 +30,20 @@ function initActions(){
   //referencja do wszystkich elementów book_image
   const bookImages = document.querySelectorAll('.book__image');
   //petla iterujaca po kazdym elemencie book__image
-  for(let i =0; i<bookImages.length; i++){
-    const bookImage = bookImages[i];
-
+  for(let image of bookImages){
+    
     //dodanie nasluchiwaczy
-    bookImage.addEventListener('dbclick', function(event){
+    image.addEventListener('dblclick', function(event){
       event.preventDefault();
 
       //pobiera id ksiazki z atr data-id
       const bookId = this.getAttribute('data-id');
+
       //sprawdzania czy ksiazka jest juz w ulubionych
       if (favoriteBooks.includes(bookId)) {
         //jesli juz jest w uliubionych, usuwamy ja z listy i usuwamy klase favorite
-        favoriteBooks.splice(favoriteBooks.indexOf(bookId), 1);
-        this.classList.remove('favorite');
+        favoriteBooks.filter(id => id !== bookId);
+        image.classList.remove('favorite');
       }else{
         //jesli nie ma w ulubionych to ja dodajemy
         favoriteBooks.push(bookId);
